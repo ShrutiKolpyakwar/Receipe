@@ -1,0 +1,100 @@
+{% extends "vege/index.html" %}
+{% load static %}
+{% block start %}
+
+<style>
+    .container {
+        margin-top: 50px;
+    }
+
+    .form-container {
+        max-width: 600px;
+        background-color: #fff;
+        border: 2px solid #007bff; /* Blue border for the form */
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #007bff; /* Blue heading */
+    }
+
+    .form-container input,
+    .form-container textarea,
+    .form-container button {
+        border: 1px solid #007bff; /* Blue border for inputs */
+        border-radius: 5px;
+    }
+
+    .form-container input:focus,
+    .form-container textarea:focus {
+        outline: none;
+        box-shadow: 0 0 5px #007bff;
+    }
+
+    .form-container textarea {
+        resize: none; /* Prevent resizing for a consistent layout */
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        border: 2px solid #007bff;
+        border-radius: 5px;
+    }
+
+    .form-container button:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    hr {
+        border: 1px solid #007bff;
+    }
+</style>
+
+<div class="container">
+    <!-- Update Recipe Form -->
+    <form class="form-container mx-auto" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Update Recipe</h2>
+        <hr>
+        <div class="mb-3">
+            <label for="recipeName" class="form-label">Recipe Name</label>
+            <input 
+                name="receipe_name" 
+                value="{{ receipes.receipe_name }}" 
+                required 
+                type="text" 
+                class="form-control" 
+                id="recipeName">
+        </div>
+        <div class="mb-3">
+            <label for="recipeDescription" class="form-label">Recipe Description</label>
+            <textarea 
+                class="form-control" 
+                name="receipe_description" 
+                required 
+                id="recipeDescription">{{ receipes.receipe_description }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="recipeImage" class="form-label">Recipe Image</label>
+            <input 
+                name="receipe_image" 
+                type="file" 
+                class="form-control" 
+                id="recipeImage">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Recipe</button>
+    </form>
+</div>
+
+{% endblock %}
